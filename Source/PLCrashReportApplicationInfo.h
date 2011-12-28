@@ -35,10 +35,14 @@
     
     /** Application version */
     NSString *_applicationVersion;
+
+    /** Application data */
+    NSData *_applicationData;
 }
 
 - (id) initWithApplicationIdentifier: (NSString *) applicationIdentifier 
-                  applicationVersion: (NSString *) applicationVersion;
+                  applicationVersion: (NSString *) applicationVersion
+                     applicationData: (NSData *) applicationData;
 
 /**
  * The application identifier. This is usually the application's CFBundleIdentifier value.
@@ -49,5 +53,10 @@
  * The application version. This is usually the application's CFBundleVersion value.
  */
 @property(nonatomic, readonly) NSString *applicationVersion;
+
+/**
+ * Optional application-specific data.
+ */
+@property(nonatomic, readonly) NSData *applicationData;
 
 @end

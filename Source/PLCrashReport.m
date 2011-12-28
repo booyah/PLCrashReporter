@@ -388,9 +388,16 @@ error:
     /* Done */
     NSString *identifier = [NSString stringWithUTF8String: applicationInfo->identifier];
     NSString *version = [NSString stringWithUTF8String: applicationInfo->version];
+    NSData *data = nil;
+
+    if (applicationInfo->has_data) {
+        data = [NSData dataWithBytes:applicationInfo->data.data
+                              length:applicationInfo->data.len];
+    }
 
     return [[[PLCrashReportApplicationInfo alloc] initWithApplicationIdentifier: identifier
-                                                          applicationVersion: version] autorelease];
+                                                             applicationVersion: version
+                                                                applicationData: data] autorelease];
 }
 
 

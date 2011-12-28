@@ -44,12 +44,14 @@
  */
 - (id) initWithApplicationIdentifier: (NSString *) applicationIdentifier 
                   applicationVersion: (NSString *) applicationVersion
+                     applicationData: (NSData *) applicationData
 {
     if ((self = [super init]) == nil)
         return nil;
 
     _applicationIdentifier = [applicationIdentifier retain];
     _applicationVersion = [applicationVersion retain];
+    _applicationData = [applicationData retain];
 
     return self;
 }
@@ -57,10 +59,12 @@
 - (void) dealloc {
     [_applicationIdentifier release];
     [_applicationVersion release];
+    [_applicationData release];
     [super dealloc];
 }
 
 @synthesize applicationIdentifier = _applicationIdentifier;
 @synthesize applicationVersion = _applicationVersion;
+@synthesize applicationData = _applicationData;
 
 @end

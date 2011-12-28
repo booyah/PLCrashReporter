@@ -321,6 +321,25 @@ static void uncaught_exception_handler (NSException *exception) {
 }
 
 /**
+ * Set a block of application-specific data that will be added to the crash report.
+ *
+ * This method may be called multiple times. Each call will replace any previously-set
+ * application data.
+ *
+ * @param data A block of application-specific data.
+ *
+ * @note This method can only be called after the crash reporter has been enabled.
+ */
+- (void) setApplicationData: (NSData *)data {
+	/* We can only add application data after the reporter has been enabled. */
+    if (!_enabled)
+        [NSException raise: PLCrashReporterException format: @"The crash reporter has not been enabled"];
+
+    /* Pass this data to the writer (which will make a copy) */
+    plcrash_log_writer_set_app_data(&signal_handler_context.writer, data.bytes, data.length);
+}
+
+/**
  * Set the callbacks that will be executed by the receiver after a crash has occured and been recorded by PLCrashReporter.
  *
  * @param callbacks A pointer to an initialized PLCrashReporterCallbacks structure.

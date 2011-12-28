@@ -131,6 +131,9 @@ message CrashReport {
 
         /* Application version string */
         required string version = 2;
+
+        /* Additional application-specific data */
+        optional bytes data = 3;
     }
     required ApplicationInfo application_info = 2;
 
